@@ -1,24 +1,21 @@
-/**
- * Content data for Cochlear Nucleus Smart App case study.
- * Source: jp-site-project-pages-extraction-2026-05-06.md
- */
-
 import { ProjectData } from "@/data/types";
 
 const cochlearSmartApp: ProjectData = {
   slug: "cochlear-smart-app",
   client: "Cochlear",
   title: "Nucleus Smart App",
-  context:
-    "Cochlear Nucleus Sound Processors are designed to be small and lightweight with a single button control. Scope included feature exploration, validation, ideation, wireframing, prototyping, user testing, design system development, UI design, documentation, developer handover, pilot studies, and product launch.",
-  description:
+  context: [
+    "Cochlear Nucleus® Sound Processors are design to be small and lightweight with a single button control. The team wanted to create a companion app to connect with the latest generation of processors. The UX team was tasked with feature exploration and validation. Once the features were locked in, we embarked on the journey of ideation, wire framing, prototyping, user testing, building out the design system, Ui design, documentation , dev handover, pilot studies and product launch.",
+  ],
+  description: [
     "Nucleus Smart App is a digital remote assistant for recipients of the Cochlear implant system, empowering the user to control their hearing performance, check the health status of their hearing processor and progress track their personal hearing fitness from their mobile phones.",
-  heroImage: "/images/cochlear-smart-app/hero-1.png",
+  ],
+  heroImage: "/images/cochlear-smart-app/additional-3.png",
   metadata: {
     platform: ["iOS", "Android"],
     services: [
-      "UX design",
-      "UI design",
+      "Ux design",
+      "Ui design",
       "1.0",
       "Strategy",
       "Pitch",
@@ -32,18 +29,16 @@ const cochlearSmartApp: ProjectData = {
       "Miro",
       "Balsamiq",
       "Sketchapp",
-      "Adobe After Effects",
+      "Adobe after effect",
     ],
-    awards: ["Red Dot"],
+    awards: ["Red dot"],
     link: {
-      label: "Start Using the Nucleus Smart App",
+      label: "Start Using the Nucleus® Smart App",
       url: "https://www.youtube.com/results?search_query=cochlear+nucleus+smart+app",
     },
   },
   journey: {
-    teamSize: "4 designers, cross-functional",
-    duration: "3+ years",
-    launchDate: "2017 - current",
+    text: "Working within a team of 4 designers, collaborate with cross-functional teams, including product managers, developers, and stakeholders outside of Cochlear, this project spanned across 3+ years. The app launched in 2017 - current.",
     ndaNotice:
       "Due to the nature of the project some details have been excluded from this case study.",
   },
@@ -60,23 +55,15 @@ const cochlearSmartApp: ProjectData = {
       ],
     },
     {
-      title: "Visual Design Exploration",
+      title: "Visual design exploration",
       images: ["/images/cochlear-smart-app/visual-design-exploration.png"],
     },
     {
-      title: "Product Launch",
+      title: "Product launch",
       images: [
         "/images/cochlear-smart-app/product-launch-1.png",
         "/images/cochlear-smart-app/hero-2.png",
         "/images/cochlear-smart-app/product-launch-2.png",
-      ],
-    },
-    {
-      title: "Additional",
-      images: [
-        "/images/cochlear-smart-app/additional-1.png",
-        "/images/cochlear-smart-app/additional-2.png",
-        "/images/cochlear-smart-app/additional-3.png",
       ],
     },
   ],

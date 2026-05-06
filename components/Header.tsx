@@ -14,7 +14,7 @@ export function Header() {
           href="/"
           className="text-lg font-semibold tracking-tight text-neutral-900 hover:text-neutral-700 transition-colors"
         >
-          JackWorks
+          Journey Projects
         </Link>
 
         <nav className="flex items-center gap-4 text-sm text-neutral-600 md:gap-6">

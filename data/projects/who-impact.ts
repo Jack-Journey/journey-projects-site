@@ -1,24 +1,22 @@
-/**
- * Content data for WHO IMPACT case study.
- * Source: jp-site-project-pages-extraction-2026-05-06.md
- */
-
 import { ProjectData } from "@/data/types";
 
 const whoImpact: ProjectData = {
   slug: "who-impact",
-  client: "WHO",
-  title: "IMPACT Clinical Decision Support Tool",
-  context:
-    "WHO develops clinical decision support systems and resources to improve patient care, especially in lower-resource settings. The aim: establish a digital platform for countries and partners to access and distribute clinical decision support tools.",
-  description:
-    "IMPACT (Integrated Management for Prevention and Control Tool) is a clinical decision support system delivering evidence-based recommendations at point-of-care. It provides tailored guidance on diagnostics, treatment plans, and preventive measures. Goals: improve outcomes, reduce errors, and promote guideline adherence.",
+  client: "World Health Organisation",
+  title: "WHO IMPACT Clinical Decision Support Tool",
+  context: [
+    "World Health Organization’s (WHO) is active in developing and promoting clinical decision support systems and resources to improve patient care, especially in lower-resource settings. These tools provide timely, evidence-based guidance to healthcare professionals to inform diagnostic and treatment decisions, facilitate shared decision-making, and support a patient-centric healthcare system.",
+    "WHO seeks to create a digital platform where countries and partners can easily access and distribute the CDS.",
+  ],
+  description: [
+    "The World Health Organization’s (WHO) Integrated Management for Prevention and Control Tool (IMPACT) is a clinical decision support system designed to enhance healthcare delivery. It provides clinicians with evidence-based recommendations at the point of care, offering tailored guidance on diagnostics, treatment plans, and preventive measures. IMPACT aims to improve patient outcomes, reduce medical errors, and promote adherence to clinical guidelines. With a user-friendly interface and accessible design, it supports healthcare professionals in making informed decisions quickly and efficiently. By streamlining medical guidance, IMPACT enhances the quality and effectiveness of global healthcare services.",
+  ],
   heroImage: "/images/who-impact/hero.png",
   metadata: {
     platform: ["Progressive web app"],
     services: [
-      "UX design",
-      "UI design",
+      "Ux design",
+      "Ui design",
       "Strategy",
       "Pitch",
       "User research",
@@ -26,50 +24,48 @@ const whoImpact: ProjectData = {
       "User testing",
       "Design system",
     ],
-    tools: ["Pen & paper", "FigJam", "Figma"],
+    tools: ["Pen & paper", "Figma jam", "Figma"],
     link: {
       label: "Pilot currently in progress",
       url: "https://www.youtube.com/results?search_query=WHO+IMPACT+clinical+decision+support",
     },
   },
   journey: {
-    teamSize: "2 designers, cross-functional",
-    duration: "1.5+ years",
-    launchDate: "2024 - current",
+    text: "Working within a team of 2 designers, collaborate with cross-functional teams, including product owners, developers, and stakeholders outside of WHO, this project spanned across 1.5+ years. 2024 - Current. Currently piloting in selected locations across the world.",
     ndaNotice:
       "Due to the nature of the project some details have been excluded from this case study.",
   },
   processSections: [
     {
-      title: "Workshops",
+      title: "Workshops to understand user groups and usage scenarios",
       images: [
-        "/images/who-impact/workshops-1.png",
-        "/images/who-impact/workshops-2.png",
+        "/images/who-impact/wireframe-prototype-2.png",
+        "/images/who-impact/final-ui-2.png",
       ],
     },
     {
       title: "Conceptualisation",
-      images: ["/images/who-impact/conceptualisation.png"],
+      images: ["/images/who-impact/wireframe-prototype-1.png"],
     },
     {
-      title: "Refining Concepts and Schematics",
+      title: "Refining concepts and schematics",
       images: [
-        "/images/who-impact/refining-1.png",
+        "/images/who-impact/conceptualisation.png",
+        "/images/who-impact/workshops-2.png",
+      ],
+    },
+    {
+      title: "Wireframe and prototype",
+      images: [
         "/images/who-impact/refining-2.png",
+        "/images/who-impact/refining-1.png",
       ],
     },
     {
-      title: "Wireframe and Prototype",
-      images: [
-        "/images/who-impact/wireframe-prototype-1.png",
-        "/images/who-impact/wireframe-prototype-2.png",
-      ],
-    },
-    {
-      title: "Final UI Design and Prototype Ready for Content",
+      title: "Final UI design and prototype ready for content",
       images: [
         "/images/who-impact/final-ui-1.png",
-        "/images/who-impact/final-ui-2.png",
+        "/images/who-impact/workshops-1.png",
       ],
     },
   ],

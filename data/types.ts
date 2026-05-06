@@ -1,16 +1,9 @@
-/**
- * Shared types for project case study data.
- * Every case study page consumes a ProjectData object.
- * These types enforce consistency across all 8 project content files.
- */
-
-/** A single section in the design process gallery */
 export interface ProcessSection {
   title: string;
+  description?: string;
   images: string[];
 }
 
-/** Metadata sidebar block — platform, services, tools, awards, external link */
 export interface ProjectMetadata {
   platform: string[];
   services: string[];
@@ -22,23 +15,25 @@ export interface ProjectMetadata {
   };
 }
 
-/** The Journey section — team composition and timeline */
 export interface ProjectJourney {
-  teamSize: string;
-  duration: string;
-  launchDate: string;
+  text: string;
   ndaNotice: string;
 }
 
-/** Complete data shape for a single case study page */
+export interface KeyBenefits {
+  items: string[];
+  summary?: string;
+}
+
 export interface ProjectData {
   slug: string;
   client: string;
   title: string;
-  context: string;
-  description: string;
+  context: string[];
+  description: string[];
   heroImage: string;
   metadata: ProjectMetadata;
   journey: ProjectJourney;
   processSections: ProcessSection[];
+  keyBenefits?: KeyBenefits;
 }

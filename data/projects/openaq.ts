@@ -1,24 +1,23 @@
-/**
- * Content data for OpenAQ Website & Data Explorer case study.
- * Source: jp-site-project-pages-extraction-2026-05-06.md
- */
-
 import { ProjectData } from "@/data/types";
 
 const openaq: ProjectData = {
   slug: "openaq",
   client: "OpenAQ",
-  title: "Website & Data Explorer",
-  context:
-    "OpenAQ is a nonprofit organisation providing universal access to air quality data to empower a global community of change-makers to solve air inequality.",
-  description:
-    "An innovative UI providing intuitive access to global air quality data. Features include an interactive Data Explorer map, real-time pollution exploration, and API access for developers.",
+  title: "Website & Data explorer",
+  context: [
+    "OpenAQ is a nonprofit organisation providing universal access to air quality data to empower a global community of change-makers to solve air inequality—the unequal access to clean air.",
+  ],
+  description: [
+    "OpenAQ’s website offers an innovative user interface that enhances the user experience by providing intuitive access to global air quality data.",
+    "The homepage features the OpenAQ Data Explorer, an interactive map that allows users to explore real-time pollution levels across various locations effortlessly. Clear navigation menus direct visitors to resources such as the Air Quality Index Hub and API access, catering to both general users and developers.",
+    "The design emphasises accessibility and engagement, empowering a global community to address air inequality through open data.",
+  ],
   heroImage: "/images/openaq/hero.png",
   metadata: {
-    platform: ["Responsive web app"],
+    platform: ["Responsive Web app"],
     services: [
-      "UX design",
-      "UI design",
+      "Ux design",
+      "Ui design",
       "Strategy",
       "Pitch",
       "User research",
@@ -26,47 +25,45 @@ const openaq: ProjectData = {
       "User testing",
       "Design system",
     ],
-    tools: ["Pen & paper", "FigJam", "Figma"],
+    tools: ["Pen & paper", "Figma jam", "Figma"],
     link: {
       label: "openaq.org",
       url: "https://openaq.org",
     },
   },
   journey: {
-    teamSize: "2 designers, cross-functional",
-    duration: "6 months",
-    launchDate: "2022 v2.0 - current",
+    text: "Working within a team of 2 designers, collaborate with cross-functional teams, including product owners, developers, and stakeholders outside of OpenAQ, this project took 6 months. 2.0 launched in 2022 - current.",
     ndaNotice:
       "Due to the nature of the project some details have been excluded from this case study.",
   },
   processSections: [
     {
-      title: "Initial Audit and Stakeholder Workshop",
+      title: "Initial audit and stakeholder workshop for 1.0",
       images: ["/images/openaq/audit-workshop.png"],
     },
     {
-      title: "2.0 UI Design Concepts",
+      title: "2.0 UI design concepts",
       images: [
-        "/images/openaq/ui-concepts-1.png",
-        "/images/openaq/ui-concepts-2.png",
+        "/images/openaq/handover-2.png",
         "/images/openaq/ui-concepts-3.png",
+        "/images/openaq/handover-3.png",
+        "/images/openaq/design-system.png",
+        "/images/openaq/ui-concepts-1.png",
         "/images/openaq/ui-concepts-4.png",
-        "/images/openaq/ui-concepts-5.png",
-        "/images/openaq/ui-concepts-6.png",
       ],
     },
     {
-      title: "Design System for 2.0",
-      images: ["/images/openaq/design-system.png"],
+      title: "Building out design system for 2.0",
+      images: ["/images/openaq/ui-concepts-5.png"],
     },
     {
-      title: "Design Finalised Handover",
+      title: "Design finalised hand over for development",
       images: [
-        "/images/openaq/handover-1.png",
-        "/images/openaq/handover-2.png",
-        "/images/openaq/handover-3.png",
+        "/images/openaq/ui-concepts-2.png",
         "/images/openaq/handover-4.png",
         "/images/openaq/handover-5.png",
+        "/images/openaq/ui-concepts-6.png",
+        "/images/openaq/handover-1.png",
       ],
     },
   ],

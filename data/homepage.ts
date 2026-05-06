@@ -6,16 +6,16 @@
 
 /** Hero section heading and bio content */
 export const hero = {
-  heading:
-    "Hi, I'm Jack. Fractional product design partner for businesses since 2009",
-  origin: ["Born in Taiwan", "From Australia", "Lives in Austria"],
-  bio: "I'm a Product Designer with a passion for creating end-to-end digital solutions that are both functional and beautifully crafted. I deliver great user experiences by applying user-centred design methodologies for a global audience, across different industries, from large multinational companies to innovative startups.",
-  highlights: [
-    "I have deep experience in the Healthcare and Medical sectors",
-    "Works across Environment, Social Impact, Finance, Enterprise Systems, Education",
-    "15+ years product design experience",
-    "Helping teams turn product ideas into 1.0 and strategies into 2.0",
-    "Award-winning teams recognised by the Red Dot Design Award and Good Design Australia",
+  origin: [
+    { text: "Born in Taiwan", emoji: "🇹🇼" },
+    { text: "From Australia", emoji: "🇦🇺" },
+    { text: "Lives in Austria", emoji: "🇦🇹" },
+  ],
+  bio: [
+    "I'm a Product Designer with a passion for creating end-to-end digital solutions that are both functional and beautifully crafted. I deliver great user experiences by applying user-centred design methodologies for a global audience, across different industries, from large multinational companies to innovative startups.",
+    "I have deep experience in the Healthcare and Medical sectors. I have also worked across the Environment, Social Impact, Finance, Enterprise Systems, and Education sectors.",
+    "Utilising my (15+ years) product design and (broad) cross-sector experience, much of my work often revolves around helping teams turn product ideas into 1.0 and strategies into 2.0.",
+    "I have worked on award-winning teams recognised by the Red Dot Design Award and Good Design Australia.",
   ],
   profileImage: "/images/shared/profile-jack-hsu.png",
 };
@@ -36,7 +36,7 @@ export const featuredProjects: FeaturedProject[] = [
     title: "Nucleus Smart App",
     description:
       "The Nucleus Smart App is a mobile digital assistant for Cochlear implant recipients, letting users control their hearing, check processor health, and track their hearing fitness.",
-    image: "/images/cochlear-smart-app/hero-1.png",
+    image: "/images/cochlear-smart-app/additional-3.png",
   },
   {
     slug: "cochlear-remote-check",

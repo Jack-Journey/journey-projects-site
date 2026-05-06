@@ -1,24 +1,15 @@
-/**
- * Dynamic case study page — renders any of the 8 project subpages.
- * Uses a single reusable template fed by per-project data from data/projects/.
- * generateStaticParams ensures all pages are pre-rendered at build time.
- */
-
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { projectsBySlug, allProjectSlugs } from "@/data/projects";
+import { BackButton } from "@/components/BackButton";
 import type { ProjectData, ProcessSection } from "@/data/types";
 
-/** Params type for Next.js 15 async params */
 type PageParams = { slug: string };
 
-/** Pre-render all project pages at build time for static export */
 export function generateStaticParams(): PageParams[] {
   return allProjectSlugs.map((slug) => ({ slug }));
 }
 
-/** Dynamic metadata per project page */
 export async function generateMetadata({
   params,
 }: {
@@ -30,7 +21,7 @@ export async function generateMetadata({
 
   return {
     title: `${project.client} — ${project.title} | Jack Hsu`,
-    description: project.description,
+    description: project.description[0],
   };
 }
 
@@ -46,28 +37,20 @@ export default async function ProjectPage({
   }
 
   return (
-    <>
+    <div>
+      <BackButton title={project.title} />
       <ProjectHero project={project} />
       <ProjectContent project={project} />
       <ProjectProcess sections={project.processSections} />
       <NdaNotice notice={project.journey.ndaNotice} />
-    </>
+    </div>
   );
 }
 
-/** Hero section — project title and hero image */
 function ProjectHero({ project }: { project: ProjectData }) {
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-12 md:px-8 md:pt-16">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
-      >
-        <span aria-hidden="true">&larr;</span>
-        Back to all work
-      </Link>
-
-      <h1 className="mt-6 text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl">
+    <section className="mx-auto max-w-6xl px-6 pt-8 md:px-8 md:pt-12">
+      <h1 className="text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl">
         {project.client} &mdash; {project.title}
       </h1>
 
@@ -86,7 +69,6 @@ function ProjectHero({ project }: { project: ProjectData }) {
   );
 }
 
-/** Content section — context, description, metadata sidebar, and journey */
 function ProjectContent({ project }: { project: ProjectData }) {
   return (
     <section className="mx-auto max-w-6xl px-6 py-12 md:px-8 md:py-16">
@@ -96,62 +78,73 @@ function ProjectContent({ project }: { project: ProjectData }) {
             <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
               Context
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-neutral-700">
-              {project.context}
-            </p>
+            <div className="mt-3 space-y-4">
+              {project.context.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-base leading-relaxed text-neutral-700"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
           <div className="mt-8">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
               Description
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-neutral-700">
-              {project.description}
-            </p>
+            <div className="mt-3 space-y-4">
+              {project.description.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className="text-base leading-relaxed text-neutral-700"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-10 rounded-lg bg-neutral-50 p-6">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
-              The Journey
-            </h2>
-            <div className="mt-4 grid gap-4 sm:grid-cols-3">
-              <div>
-                <p className="text-xs text-neutral-400">Team</p>
-                <p className="mt-1 text-sm font-medium text-neutral-700">
-                  {project.journey.teamSize}
+          {project.keyBenefits && (
+            <div className="mt-8">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                Key Benefits
+              </h2>
+              <ul className="mt-3 space-y-2">
+                {project.keyBenefits.items.map((item, i) => (
+                  <li
+                    key={i}
+                    className="text-base leading-relaxed text-neutral-700"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {project.keyBenefits.summary && (
+                <p className="mt-4 text-base leading-relaxed text-neutral-700">
+                  {project.keyBenefits.summary}
                 </p>
-              </div>
-              <div>
-                <p className="text-xs text-neutral-400">Duration</p>
-                <p className="mt-1 text-sm font-medium text-neutral-700">
-                  {project.journey.duration}
-                </p>
-              </div>
-              <div>
-                <p className="text-xs text-neutral-400">Launch</p>
-                <p className="mt-1 text-sm font-medium text-neutral-700">
-                  {project.journey.launchDate}
-                </p>
-              </div>
+              )}
             </div>
-            <div className="mt-6">
-              <a
-                href="mailto:jack@journeyprojects.co"
-                className="text-sm font-medium text-neutral-900 underline underline-offset-4 hover:text-neutral-600 transition-colors"
-              >
-                Get in touch
-              </a>
-            </div>
-          </div>
+          )}
         </div>
 
         <MetadataSidebar project={project} />
+      </div>
+
+      <div className="mt-10 rounded-lg bg-neutral-50 p-6">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+          The Journey
+        </h2>
+        <p className="mt-4 text-base leading-relaxed text-neutral-700">
+          {project.journey.text}
+        </p>
       </div>
     </section>
   );
 }
 
-/** Metadata sidebar — platform, services, tools, awards, link */
 function MetadataSidebar({ project }: { project: ProjectData }) {
   const { metadata } = project;
 
@@ -184,7 +177,6 @@ function MetadataSidebar({ project }: { project: ProjectData }) {
   );
 }
 
-/** Reusable metadata label + tag list */
 function MetadataBlock({
   label,
   items,
@@ -211,7 +203,6 @@ function MetadataBlock({
   );
 }
 
-/** Process sections — image galleries showing the design process */
 function ProjectProcess({ sections }: { sections: ProcessSection[] }) {
   if (sections.length === 0) return null;
 
@@ -223,6 +214,11 @@ function ProjectProcess({ sections }: { sections: ProcessSection[] }) {
             <h3 className="text-lg font-semibold text-neutral-900">
               {section.title}
             </h3>
+            {section.description && (
+              <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+                {section.description}
+              </p>
+            )}
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               {section.images.map((image) => (
                 <div
@@ -247,7 +243,6 @@ function ProjectProcess({ sections }: { sections: ProcessSection[] }) {
   );
 }
 
-/** NDA notice — appears on every case study page */
 function NdaNotice({ notice }: { notice: string }) {
   return (
     <section className="border-t border-neutral-200">
