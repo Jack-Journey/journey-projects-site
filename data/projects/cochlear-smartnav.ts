@@ -35,7 +35,7 @@ const cochlearSmartnav: ProjectData = {
     awards: ["Good Design Australia"],
     link: {
       label: "Inside Look at the SmartNav System",
-      url: "https://www.youtube.com/results?search_query=cochlear+smartnav",
+      url: "https://youtu.be/D-nUbJcRxcY?si=5fAGPbhnznWYH1wd",
     },
   },
   journey: {

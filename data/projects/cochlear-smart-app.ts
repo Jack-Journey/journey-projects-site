@@ -34,7 +34,7 @@ const cochlearSmartApp: ProjectData = {
     awards: ["Red dot"],
     link: {
       label: "Start Using the Nucleus® Smart App",
-      url: "https://www.youtube.com/results?search_query=cochlear+nucleus+smart+app",
+      url: "https://youtu.be/oFM13CmGGo4?si=4OMyznzGc4Y12GiU",
     },
   },
   journey: {

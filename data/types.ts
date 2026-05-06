@@ -9,6 +9,7 @@ export interface ProjectMetadata {
   services: string[];
   tools: string[];
   awards?: string[];
+  status?: string;
   link?: {
     label: string;
     url: string;

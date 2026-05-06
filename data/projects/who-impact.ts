@@ -25,10 +25,7 @@ const whoImpact: ProjectData = {
       "Design system",
     ],
     tools: ["Pen & paper", "Figma jam", "Figma"],
-    link: {
-      label: "Pilot currently in progress",
-      url: "https://www.youtube.com/results?search_query=WHO+IMPACT+clinical+decision+support",
-    },
+    status: "Pilot currently in progress",
   },
   journey: {
     text: "Working within a team of 2 designers, collaborate with cross-functional teams, including product owners, developers, and stakeholders outside of WHO, this project spanned across 1.5+ years. 2024 - Current. Currently piloting in selected locations across the world.",

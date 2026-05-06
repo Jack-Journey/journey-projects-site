@@ -158,6 +158,17 @@ function MetadataSidebar({ project }: { project: ProjectData }) {
         <MetadataBlock label="Awards" items={metadata.awards} />
       )}
 
+      {metadata.status && (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            Status
+          </p>
+          <p className="mt-2 text-sm text-neutral-700">
+            {metadata.status}
+          </p>
+        </div>
+      )}
+
       {metadata.link && (
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">

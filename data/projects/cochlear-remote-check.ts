@@ -33,7 +33,7 @@ const cochlearRemoteCheck: ProjectData = {
     awards: ["Good Design Australia"],
     link: {
       label: "Remote Check @ Cochlear",
-      url: "https://www.cochlear.com/au/en/home/ongoing-care-and-support/product-support/nucleus-smart-app/remote-check",
+      url: "https://www.cochlear.com/us/en/campaign/remote-check-pro",
     },
   },
   journey: {
