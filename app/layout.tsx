@@ -19,11 +19,22 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Jack Hsu — Fractional Product Design Partner",
+  title: "Journey Projects",
   description:
     "Product Designer with 15+ years experience creating end-to-end digital solutions for healthcare, environment, social impact, and enterprise systems.",
+  icons: {
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+  appleWebApp: {
+    title: "Journey Projects",
+  },
   openGraph: {
-    title: "Jack Hsu — Fractional Product Design Partner",
+    title: "Journey Projects",
     description:
       "Product Designer with 15+ years experience creating end-to-end digital solutions.",
     type: "website",
