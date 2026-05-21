@@ -13,3 +13,12 @@
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Dev-tier: branch deploys (e.g. dev--journey-projects-site.netlify.app) must
+# never be indexed by search engines. Prevents duplicate-content penalties and
+# pre-release leakage against the live site. Non-negotiable per the locked
+# dev-tier-promotion posture (~/GitHub/jp-private/team/decisions/dev-tier-promotion-posture-locked-2026-05-20.md).
+[[context.branch-deploy.headers]]
+  for = "/*"
+  [context.branch-deploy.headers.values]
+    X-Robots-Tag = "noindex"
