@@ -1,0 +1,3 @@
+Journey Projects orchestrator - Posture C #552 first controlled-minimal autonomous push.
+This file is a reversible proof-of-plumbing marker (clone -> apply -> commit -> push HEAD:dev -> guard-4 -> off-host read-back).
+It carries no runtime state and is safe to delete.
