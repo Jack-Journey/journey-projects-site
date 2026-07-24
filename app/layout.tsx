@@ -1,7 +1,7 @@
 /**
  * Root layout for the Journey Projects corporate site.
  * Wraps all pages with shared header, footer, and global styles.
- * Uses Inter font from Google Fonts for clean sans-serif typography.
+ * Uses Poppins font from Google Fonts for clean sans-serif typography.
  */
 
 import type { Metadata } from "next";
