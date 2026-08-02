@@ -2,7 +2,14 @@
  * Custom 404 page — shown when a route does not match any project slug.
  */
 
+import type { Metadata } from "next";
 import Link from "next/link";
+
+/* Distinct title so the 404 does not inherit the generic site title
+   (finding 2.1.2, SC 2.4.2 Page Titled). */
+export const metadata: Metadata = {
+  title: "Page not found — Journey Projects",
+};
 
 export default function NotFound() {
   return (
