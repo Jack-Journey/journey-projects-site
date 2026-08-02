@@ -1,3 +1,6 @@
+# internal team artefacts — PUBLIC repo, must never publish (plan amendment A9)
+/team/
+
 # dependencies
 /node_modules
 /.pnp
