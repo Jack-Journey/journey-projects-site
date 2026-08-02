@@ -1,7 +1,11 @@
 /**
  * Site footer component — appears on every page.
  * Repeats contact information from the header for accessibility.
+ * Includes a utility link to the /qr share card (Jack override 2026-08-02,
+ * #915 sitting — supersedes a11y plan ruling A10 "no footer entry").
  */
+
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -34,6 +38,9 @@ export function Footer() {
             >
               LinkedIn
             </a>
+            <Link href="/qr" className="hover:text-neutral-900 transition-colors">
+              QR card
+            </Link>
           </div>
         </div>
 
