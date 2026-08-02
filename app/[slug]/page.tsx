@@ -38,7 +38,13 @@ export default async function ProjectPage({
 
   return (
     <div>
-      <BackButton title={project.title} />
+      {/* Visible string is arrow + title; "Back to all work — " is announced
+          via the component's sr-only span (Jack ruling, #915 sitting). */}
+      <BackButton
+        href="/#work"
+        visibleText={project.title}
+        srLabel="Back to all work — "
+      />
       <ProjectHero project={project} />
       <ProjectContent project={project} />
       <ProjectProcess sections={project.processSections} />
