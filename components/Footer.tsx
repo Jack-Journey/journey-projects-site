@@ -47,7 +47,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-neutral-100 pt-6 text-xs text-neutral-400">
+        <div className="mt-8 border-t border-neutral-100 pt-6 text-xs text-neutral-600">
           <p>&copy; {new Date().getFullYear()} Jack Hsu. All rights reserved.</p>
         </div>
       </div>

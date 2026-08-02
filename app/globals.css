@@ -5,7 +5,12 @@
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
   --color-neutral-300: #d4d4d4;
+  /* neutral-400 is NOT approved for text — 2.52:1 on white, 2.42:1 on neutral-50
+     (WCAG 1.4.3 requires 4.5:1; finding 2.2.1, conformance review 2026-08-02).
+     Borders and non-text decoration only. Label/metadata text roles use neutral-600. */
   --color-neutral-400: #a3a3a3;
+  /* neutral-500 is marginal: 4.74:1 on white (passes), 4.35:1 on neutral-100 (fails).
+     Do not place it on tinted surfaces. */
   --color-neutral-500: #737373;
   --color-neutral-600: #525252;
   --color-neutral-700: #404040;

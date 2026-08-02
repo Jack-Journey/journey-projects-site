@@ -75,7 +75,7 @@ function ProjectContent({ project }: { project: ProjectData }) {
       <div className="grid gap-12 lg:grid-cols-[1fr_300px]">
         <div>
           <div>
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
               Context
             </h2>
             <div className="mt-3 space-y-4">
@@ -91,7 +91,7 @@ function ProjectContent({ project }: { project: ProjectData }) {
           </div>
 
           <div className="mt-8">
-            <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+            <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
               Description
             </h2>
             <div className="mt-3 space-y-4">
@@ -108,7 +108,7 @@ function ProjectContent({ project }: { project: ProjectData }) {
 
           {project.keyBenefits && (
             <div className="mt-8">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
                 Key Benefits
               </h2>
               <ul className="mt-3 space-y-2">
@@ -134,7 +134,7 @@ function ProjectContent({ project }: { project: ProjectData }) {
       </div>
 
       <div className="mt-10 rounded-lg bg-neutral-50 p-6">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
           The Journey
         </h2>
         <p className="mt-4 text-base leading-relaxed text-neutral-700">
@@ -160,7 +160,7 @@ function MetadataSidebar({ project }: { project: ProjectData }) {
 
       {metadata.status && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
             Status
           </p>
           <p className="mt-2 text-sm text-neutral-700">
@@ -171,7 +171,7 @@ function MetadataSidebar({ project }: { project: ProjectData }) {
 
       {metadata.link && (
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+          <p className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
             Link
           </p>
           <a
@@ -197,7 +197,7 @@ function MetadataBlock({
 }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+      <p className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
         {label}
       </p>
       <div className="mt-2 flex flex-wrap gap-2">
@@ -258,7 +258,7 @@ function NdaNotice({ notice }: { notice: string }) {
   return (
     <section className="border-t border-neutral-200">
       <div className="mx-auto max-w-6xl px-6 py-8 md:px-8">
-        <p className="text-center text-sm italic text-neutral-400">{notice}</p>
+        <p className="text-center text-sm italic text-neutral-600">{notice}</p>
       </div>
     </section>
   );
