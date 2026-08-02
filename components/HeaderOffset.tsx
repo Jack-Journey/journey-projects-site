@@ -24,6 +24,16 @@
  * a height change — text zoom, viewport width, and late webfont swap — and
  * not for viewport changes that leave the header's box alone.
  *
+ * Fail-open contract. This component must never be able to break a page. It
+ * runs in the root layout, so a throw here takes down all 11 routes, and the
+ * thing it would take down is a rem fallback that was already working. The
+ * observer is therefore feature-detected AND wrapped in try/catch, and the
+ * height is published before either guard — so the degraded states are, in
+ * order: observer works (offset tracks the header exactly) > observer
+ * unavailable or throwing (offset is correct at load, then stale if the
+ * header later reflows) > JS off entirely (rem fallback, exact for a
+ * one-line header at any text size). None of them is a broken page.
+ *
  * External dependencies: react (client component; the App Router root layout
  * renders it alongside Header).
  */
@@ -52,11 +62,41 @@ export function HeaderOffset() {
       );
     };
 
+    // Publish BEFORE the observer is constructed. This ordering is the whole
+    // fail-open design: by this point the property already holds the correct
+    // height, so everything below is an enhancement that keeps it correct as
+    // the header changes — never the mechanism that makes it correct.
     publish();
 
-    // SIDE EFFECT: observes the header element for box-size changes.
-    const observer = new ResizeObserver(publish);
-    observer.observe(header);
+    // Everything from here is guarded twice, because this effect runs in the
+    // ROOT layout: an exception here propagates above every route segment,
+    // and the repo ships no app/error.tsx or app/global-error.tsx, so it
+    // would reach Next's default GlobalError and replace the whole document
+    // with "Application error: a client-side exception has occurred" — on all
+    // 11 pages, including the two that have no back bar at all (availability
+    // finding A-4, PR #16 panel; measured, not theorised).
+    //
+    // The failure would also be perverse: the CSS fallback in globals.css
+    // fails OPEN by construction, so the only thing that could take the site
+    // down is the code whose sole job is to improve on that fallback. Degrade
+    // to it instead — an unscaled-but-present sticky offset is a cosmetic
+    // defect at 200% text zoom; a blank document is a total outage.
+    //
+    // Two guards, because they catch different things: the feature detection
+    // covers the constructor being absent (older or stripped-down engines),
+    // and the try/catch covers it being present but throwing.
+    if (typeof ResizeObserver === "undefined") {
+      return;
+    }
+
+    let observer: ResizeObserver;
+    try {
+      // SIDE EFFECT: observes the header element for box-size changes.
+      observer = new ResizeObserver(publish);
+      observer.observe(header);
+    } catch {
+      return;
+    }
 
     return () => {
       // SIDE EFFECT: detaches the observer and restores the CSS fallback.
