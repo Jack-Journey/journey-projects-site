@@ -1,11 +1,30 @@
-@import "tailwindcss";
+/* Tailwind's automatic source detection is disabled (`source(none)`) and the
+   scanned roots are declared explicitly below.
+   Reason (SD-2, PR #11 review panel): auto-detection walks the whole repo, so
+   the a11y gate's own fixtures and baseline literals in tools/a11y-gate/ were
+   being read as class usage and compiled into the shipped production
+   stylesheet as dead utilities — the retired neutral-400 text utility among
+   them, present in the baseline only because the gate exists to flag it. The
+   gate describes defects; it must not be able to resurrect them in the CSS it
+   grades. Only app/ and components/ author markup; data/ holds content strings
+   with no class names, so it is deliberately not a source root.
+   Future editors: comments inside scanned files are scanned too — never write
+   a literal utility-class token in prose here. */
+@import "tailwindcss" source(none);
+@source "../app";
+@source "../components";
 
 @theme {
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
   --color-neutral-300: #d4d4d4;
+  /* neutral-400 is NOT approved for text — 2.52:1 on white, 2.42:1 on neutral-50
+     (WCAG 1.4.3 requires 4.5:1; finding 2.2.1, conformance review 2026-08-02).
+     Borders and non-text decoration only. Label/metadata text roles use neutral-600. */
   --color-neutral-400: #a3a3a3;
+  /* neutral-500 is marginal: 4.74:1 on white (passes), 4.35:1 on neutral-100 (fails).
+     Do not place it on tinted surfaces. */
   --color-neutral-500: #737373;
   --color-neutral-600: #525252;
   --color-neutral-700: #404040;
@@ -18,6 +37,13 @@
 
 html {
   scroll-behavior: smooth;
+  /* Reserve the sticky band (header 61px + back bar 45px = 106px; the back bar
+     is 24px of vertical padding + a 20px small-text line box + a 1px bottom
+     border) so fragment navigation and focus-driven scrolls never land
+     content underneath it (finding 2.2.3, defensive on SC 2.4.11 Focus Not
+     Obscured; also fixes the /#work landing position). 7rem = 112px, which
+     clears the 106px band with 6px of headroom. */
+  scroll-padding-top: 7rem;
 }
 
 body {

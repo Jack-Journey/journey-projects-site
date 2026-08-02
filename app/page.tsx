@@ -38,10 +38,13 @@ function HeroSection() {
         <p>
           Hi, I&apos;m <strong>Jack</strong>.
         </p>
-        <p>
+        {/* The page's single h1 (finding 2.1.1, SC 1.3.1). The positioning line
+            is promoted from <p> — Tailwind preflight resets heading size/weight
+            to inherit, so this renders identically; the change is semantic only. */}
+        <h1>
           <strong>Fractional product design partner</strong> for businesses
           since 2009
-        </p>
+        </h1>
       </div>
 
       <div className="mt-4 space-y-0.5 text-base text-neutral-600">
