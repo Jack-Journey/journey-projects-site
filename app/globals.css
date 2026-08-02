@@ -23,6 +23,11 @@
 
 html {
   scroll-behavior: smooth;
+  /* Reserve the sticky band (header 61px + back bar 49px = 110px) so
+     fragment navigation and focus-driven scrolls never land content
+     underneath it (finding 2.2.3, defensive on SC 2.4.11 Focus Not
+     Obscured; also fixes the /#work landing position). */
+  scroll-padding-top: 7rem;
 }
 
 body {
