@@ -16,9 +16,9 @@
 import Link from "next/link";
 
 export function BackButton({ title }: { title: string }) {
-  // top-[61px] matches the header's real rendered height (60px content +
-  // 1px border) — top-14 (56px) left the bar's top 5px underneath the z-50
-  // header (finding 2.2.3, measured).
+  // The 61px offset matches the header's real rendered height (60px content
+  // + 1px border) — the previous 56px offset left the bar's top 5px
+  // underneath the z-50 header (finding 2.2.3, measured).
   return (
     <div className="sticky top-[61px] z-40 bg-white/95 backdrop-blur-sm border-b border-neutral-100">
       <div className="mx-auto max-w-6xl px-6 py-3 md:px-8">
