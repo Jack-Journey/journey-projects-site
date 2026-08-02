@@ -31,8 +31,22 @@ export function Footer() {
   // Reads the current route from the App Router context. Resolved at prerender
   // time for each statically exported page.
   const pathname = usePathname();
-  // trailingSlash is off today, but normalise so "/qr/" never slips through.
-  const showQrLink = pathname !== QR_ROUTE && pathname !== `${QR_ROUTE}/`;
+  // Exact match only. A trailing-slash arm (`pathname !== `${QR_ROUTE}/``) was
+  // here as defensive normalisation and was removed by the PR #16 panel: it
+  // was unreachable in production AND was the only thing that could crash.
+  //
+  // Unreachable because Netlify 301s "/qr/" to "/qr" at the edge, so the
+  // client never sees the trailing-slash pathname (sys-ops, verified against
+  // the live host). Crashing because `showQrLink` is computed from
+  // `usePathname()` while the DOCUMENT that was served is chosen by the host:
+  // on any host that does not normalise, "/qr/" serves 404.html — which
+  // carries the link — and the trailing-slash arm then removed it during
+  // hydration. That mismatch threw an uncaught React #418 and forced a
+  // full client re-render of the root. Control-armed by bug-tester: the same
+  // 404.html served at "/totally-bogus" threw nothing, so the pathname was
+  // the cause. Without the arm, "/qr/" simply renders the 404's link, matches
+  // the served HTML, and hydrates silently.
+  const showQrLink = pathname !== QR_ROUTE;
 
   return (
     <footer className="border-t border-neutral-200 bg-white">

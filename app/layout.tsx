@@ -9,6 +9,7 @@ import Script from "next/script";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
+import { HeaderOffset } from "@/components/HeaderOffset";
 import { Footer } from "@/components/Footer";
 
 const poppins = Poppins({
@@ -65,6 +66,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans">
         <Header />
+        {/* Renders nothing — keeps --jp-header-h in step with the header's
+            real height so the sticky back bar clears it at any text size. */}
+        <HeaderOffset />
         <main>{children}</main>
         <Footer />
       </body>
