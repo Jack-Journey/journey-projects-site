@@ -1,0 +1,115 @@
+{
+  "entries": [
+    {
+      "id": "contrast|404.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "template|404.html|title-duplicate-of-homepage",
+      "finding": "JP_Web_page-titled_01",
+      "note": "page <title> (\"Journey Projects\") is identical to the homepage title — does not describe this page"
+    },
+    {
+      "id": "contrast|cochlear-remote-check.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|cochlear-remote-check.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|cochlear-smart-app.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|cochlear-smart-app.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|cochlear-smartnav.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|cochlear-smartnav.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|evidation.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|evidation.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|index.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "template|index.html|h1-count",
+      "finding": "JP_Web_info-and-relationships_01",
+      "note": "page has 0 <h1> elements — required exactly 1"
+    },
+    {
+      "id": "contrast|openaq.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|openaq.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|qr.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "template|qr.html|h1-count",
+      "finding": "plan-A5/SD-F7 (no review finding ID — /qr was not in the conformance review corpus; fix lands in PR-B)",
+      "note": "page has 0 <h1> elements — required exactly 1"
+    },
+    {
+      "id": "contrast|trapeze.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|trapeze.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|who-impact.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|who-impact.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|who-spdi.html|text-neutral-400 on #ffffff|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #ffffff = 2.52:1 — requires 4.5:1 (normal text)"
+    },
+    {
+      "id": "contrast|who-spdi.html|text-neutral-400 on #fafafa|normal",
+      "finding": "JP_Web_contrast-minimum_01",
+      "note": "text-neutral-400 (#a3a3a3) on #fafafa = 2.42:1 — requires 4.5:1 (normal text)"
+    }
+  ],
+  "comment": "Baselined known defects (plan amendment A3 — gate-first baselined ratchet). Every entry is a REAL defect present in the built output today. Remediation PRs remove their entries as they fix; a removed entry with the defect persisting goes RED (new-defect arm), a fixed defect with its entry retained goes RED (stale arm). finding = ID in team/reviews/2026-08-02-jp-site-wcag22aa-conformance-review.md (repo-local, untracked)."
+}
