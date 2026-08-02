@@ -28,11 +28,24 @@
  * runs in the root layout, so a throw here takes down all 11 routes, and the
  * thing it would take down is a rem fallback that was already working. The
  * observer is therefore feature-detected AND wrapped in try/catch, and the
- * height is published before either guard — so the degraded states are, in
- * order: observer works (offset tracks the header exactly) > observer
- * unavailable or throwing (offset is correct at load, then stale if the
- * header later reflows) > JS off entirely (rem fallback, exact for a
- * one-line header at any text size). None of them is a broken page.
+ * height is published before either guard.
+ *
+ * The degraded states do NOT form a clean ordering, and it is worth being
+ * exact about why (availability finding A-8):
+ *
+ * - observer works — offset tracks the header exactly, at any text size.
+ * - observer unavailable or throwing — publish() has already run, so the
+ *   inline px is correct AT LOAD. But that inline value SHADOWS the CSS
+ *   fallback, and nothing updates it afterwards: a mid-session text-zoom
+ *   change leaves the bar frozen at the load-time height (bar 61 against a
+ *   121px header), which puts the arrow back underneath the header.
+ * - JS off entirely — the rem fallback is never shadowed, so the calc() stays
+ *   live and the offset SELF-HEALS across a zoom change.
+ *
+ * So "observer unavailable" is better than "JS off" at load and worse than it
+ * after a zoom change. Neither is ever worse than the pre-fix baseline, which
+ * was a hardcoded px frozen for everyone. None of them is a broken page, which
+ * is the property that actually has to hold.
  *
  * External dependencies: react (client component; the App Router root layout
  * renders it alongside Header).
@@ -85,12 +98,22 @@ export function HeaderOffset() {
     // Two guards, because they catch different things: the feature detection
     // covers the constructor being absent (older or stripped-down engines),
     // and the try/catch covers it being present but throwing.
-    if (typeof ResizeObserver === "undefined") {
-      return;
-    }
-
+    //
+    // The detection sits INSIDE the try deliberately. `typeof` is safe against
+    // an *undeclared* identifier, but not against a global backed by a
+    // throwing accessor: resolving the name performs a property get on the
+    // global object, so the getter runs and throws before `typeof` ever yields
+    // a string. With the check outside the try that throw escaped, and the
+    // whole document went down exactly as it did before the guard existed
+    // (availability finding A-8, PR #16 panel — mechanism confirmed by
+    // measurement, reachability unverified: no browser or extension is known
+    // to produce that shape). Keeping detection, construction and observe() in
+    // one try means every one of those failure modes lands in the same catch.
     let observer: ResizeObserver;
     try {
+      if (typeof ResizeObserver === "undefined") {
+        return;
+      }
       // SIDE EFFECT: observes the header element for box-size changes.
       observer = new ResizeObserver(publish);
       observer.observe(header);
