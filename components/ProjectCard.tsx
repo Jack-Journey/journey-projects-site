@@ -37,7 +37,7 @@ export function ProjectCard({
         />
       </div>
       <div className="p-6">
-        <p className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+        <p className="text-xs font-semibold uppercase tracking-wider text-neutral-600">
           {client}
         </p>
         <h3 className="mt-1 text-lg font-semibold text-neutral-900">{title}</h3>

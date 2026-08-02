@@ -1,0 +1,4 @@
+{
+  "comment": "Baselined known defects (plan amendment A3 — gate-first baselined ratchet). Every entry is a REAL defect present in the built output today. Remediation PRs remove their entries as they fix; a removed entry with the defect persisting goes RED (new-defect arm), a fixed defect with its entry retained goes RED (stale arm). finding = ID in team/reviews/2026-08-02-jp-site-wcag22aa-conformance-review.md (repo-local, untracked). HISTORY: PR-A (#11) baselined 22 entries. PR-B (#10) removed all 22 — its fix set (findings 2.1.1, 2.1.2, 2.2.1, 2.2.2 and SD-F7) clears every one, verified by the gate's own stale-entry arm reporting 22/22 no-longer-detected before removal. The ledger is now empty, so the gate is a plain no-new-defects gate from here, and any entry added back is a deliberate, reviewed concession.",
+  "entries": []
+}

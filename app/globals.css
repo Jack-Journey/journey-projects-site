@@ -1,11 +1,30 @@
-@import "tailwindcss";
+/* Tailwind's automatic source detection is disabled (`source(none)`) and the
+   scanned roots are declared explicitly below.
+   Reason (SD-2, PR #11 review panel): auto-detection walks the whole repo, so
+   the a11y gate's own fixtures and baseline literals in tools/a11y-gate/ were
+   being read as class usage and compiled into the shipped production
+   stylesheet as dead utilities — the retired neutral-400 text utility among
+   them, present in the baseline only because the gate exists to flag it. The
+   gate describes defects; it must not be able to resurrect them in the CSS it
+   grades. Only app/ and components/ author markup; data/ holds content strings
+   with no class names, so it is deliberately not a source root.
+   Future editors: comments inside scanned files are scanned too — never write
+   a literal utility-class token in prose here. */
+@import "tailwindcss" source(none);
+@source "../app";
+@source "../components";
 
 @theme {
   --color-neutral-50: #fafafa;
   --color-neutral-100: #f5f5f5;
   --color-neutral-200: #e5e5e5;
   --color-neutral-300: #d4d4d4;
+  /* neutral-400 is NOT approved for text — 2.52:1 on white, 2.42:1 on neutral-50
+     (WCAG 1.4.3 requires 4.5:1; finding 2.2.1, conformance review 2026-08-02).
+     Borders and non-text decoration only. Label/metadata text roles use neutral-600. */
   --color-neutral-400: #a3a3a3;
+  /* neutral-500 is marginal: 4.74:1 on white (passes), 4.35:1 on neutral-100 (fails).
+     Do not place it on tinted surfaces. */
   --color-neutral-500: #737373;
   --color-neutral-600: #525252;
   --color-neutral-700: #404040;
@@ -16,8 +35,47 @@
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+:root {
+  /* Live height of the sticky header, in CSS px. Single source of truth for
+     everything that has to clear the header: the sticky back bar's `top`
+     offset (components/BackButton.tsx) and the band reservation below. Before
+     this existed the bar cleared the header with a hardcoded 61px offset
+     while this file reserved the band in `rem` — two unit systems describing
+     the same measurement, which disagreed the moment text zoom was applied
+     (bug-tester BUG 3, PR #16 panel; SC 1.4.4 Resize Text, AA).
+
+     The value below is the FALLBACK, derived from the header's own
+     composition: 1rem of padding above and below its row, plus the large
+     wordmark's 1.75rem line box, plus its 1px bottom rule = 61px at a 16px
+     root. It is exact whenever the header is one line tall.
+
+     It is not sufficient on its own. At 200% text zoom on a narrow viewport
+     the wordmark WRAPS, so the header grows to two line boxes — measured
+     177px at 390px wide, against 121px for this fallback. A rem constant
+     cannot see a reflow, so components/HeaderOffset.tsx measures the real
+     header and overwrites this property at runtime. Keeping the derivation
+     here means a JS-off client still gets a value that scales with text
+     size, which is strictly better than the fixed px it replaces. */
+  --jp-header-h: calc(3.75rem + 1px);
+
+  /* Height of the sticky back bar, rounded UP from its real composition:
+     0.75rem of padding above and below its row, plus the inherited
+     `line-height: normal` strut (1.5rem for Poppins at any size), plus its
+     1px bottom rule = 49px at a 16px root — measured, on BOTH bar modes.
+     3.25rem = 52px leaves 3px of headroom and, being rem-based, keeps that
+     headroom proportional under text zoom. */
+  --jp-back-bar-h: 3.25rem;
+}
+
 html {
   scroll-behavior: smooth;
+  /* Reserve the whole sticky band so fragment navigation and focus-driven
+     scrolls never land content underneath it (finding 2.2.3, defensive on
+     SC 2.4.11 Focus Not Obscured; also fixes the /#work landing position).
+     Composed from the two properties above rather than a literal, so the
+     reservation tracks the band at any text size. At a 16px root: 61 + 52 =
+     113px against a measured 110px band, i.e. 3px of headroom. */
+  scroll-padding-top: calc(var(--jp-header-h) + var(--jp-back-bar-h));
 }
 
 body {

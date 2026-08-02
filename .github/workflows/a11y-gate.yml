@@ -1,0 +1,60 @@
+# a11y-gate — Tier-B accessibility merge gate (skills/accessibility §3).
+#
+# This is the repo's first CI workflow, born zero-privilege by design
+# (plan amendment A5 / security F2):
+#   - permissions: contents: read — nothing else, ever
+#   - trigger: pull_request (NEVER pull_request_target — no secret exposure
+#     to fork-controlled code; this workflow uses no secrets at all)
+#   - all actions SHA-pinned (tag comments are documentation, the SHA is the pin).
+#     Pins are the node24-native v5 majors (sys-ops S1, PR #11 review panel);
+#     each SHA was read from the official action repo's tag refs at bump time,
+#     not copied from a tag string.
+#   - npm ci against the committed lockfile; no install scripts beyond it
+#
+# What it runs:
+#   1. lint:a11y  — enumerated jsx-a11y error subset (eslint invoked directly;
+#      `next lint` is deprecated in Next 15)
+#   2. a11y:gate  — builds the static export and grades the REAL built output:
+#      usage-derived contrast (oklab/oklch-aware) + template checks, against
+#      the baselined ratchet in tools/a11y-gate/baseline.json
+#
+# NOTE: making this a REQUIRED status check on dev is a repo-ruleset edit that
+# belongs to Jack's admin sitting (plan amendment A2 — a required check must
+# land together with a bypass actor, or phone-merges hard-block). Until that
+# sitting, this workflow reports but does not block at the branch level.
+
+name: a11y-gate
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  a11y-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+
+      - name: Setup Node
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # SD-6: the error-subset rides whatever eslint-config-next resolves for
+      # jsx-a11y — assert the tree resolves to the single exact-pinned copies
+      # (npm ls exits non-zero on missing/invalid/conflicting resolution)
+      - name: Assert a11y toolchain resolution
+        run: npm ls eslint-plugin-jsx-a11y parse5
+
+      - name: jsx-a11y enumerated error subset
+        run: npm run lint:a11y
+
+      - name: a11y gate — build + usage-derived contrast + template checks
+        run: npm run a11y:gate

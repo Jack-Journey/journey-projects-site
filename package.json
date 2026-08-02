@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "lint:a11y": "eslint app components data",
+    "a11y:gate": "node tools/a11y-gate/run.mjs"
   },
   "dependencies": {
     "next": "^15.3.0",
@@ -20,6 +22,8 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.3.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "parse5": "8.0.1",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0"
   }
