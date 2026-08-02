@@ -6,11 +6,48 @@
  * Label is "Share this site", not "QR card": /qr encodes the site URL, not
  * scannable contact data, so a business-card label would mis-set expectations
  * sitting fourth under email/phone/LinkedIn (design-qa, Jack-ruled same sitting).
+ *
+ * The /qr link is suppressed while the user is already on /qr — a footer item
+ * pointing at the current page reads as a broken link (design-qa, PR #12).
+ * Jack ruled suppress, not `aria-current` + still clickable (#915 sitting).
+ *
+ * Why a client component: the footer lives in the root layout, and a server
+ * component in a layout has no access to the current route. `usePathname` is
+ * the App Router mechanism, and under `output: "export"` every route is
+ * prerendered individually, so the suppression is baked into the static HTML —
+ * it is not a client-side removal of a link that shipped in the markup. That
+ * property is asserted by the built-HTML check in the PR, not assumed.
  */
 
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+/** Route whose footer must not link to itself. */
+const QR_ROUTE = "/qr";
 
 export function Footer() {
+  // Reads the current route from the App Router context. Resolved at prerender
+  // time for each statically exported page.
+  const pathname = usePathname();
+  // Exact match only. A trailing-slash arm (`pathname !== `${QR_ROUTE}/``) was
+  // here as defensive normalisation and was removed by the PR #16 panel: it
+  // was unreachable in production AND was the only thing that could crash.
+  //
+  // Unreachable because Netlify 301s "/qr/" to "/qr" at the edge, so the
+  // client never sees the trailing-slash pathname (sys-ops, verified against
+  // the live host). Crashing because `showQrLink` is computed from
+  // `usePathname()` while the DOCUMENT that was served is chosen by the host:
+  // on any host that does not normalise, "/qr/" serves 404.html — which
+  // carries the link — and the trailing-slash arm then removed it during
+  // hydration. That mismatch threw an uncaught React #418 and forced a
+  // full client re-render of the root. Control-armed by bug-tester: the same
+  // 404.html served at "/totally-bogus" threw nothing, so the pathname was
+  // the cause. Without the arm, "/qr/" simply renders the 404's link, matches
+  // the served HTML, and hydrates silently.
+  const showQrLink = pathname !== QR_ROUTE;
+
   return (
     <footer className="border-t border-neutral-200 bg-white">
       <div className="mx-auto max-w-6xl px-6 py-12 md:px-8 md:py-16">
@@ -41,9 +78,14 @@ export function Footer() {
             >
               LinkedIn
             </a>
-            <Link href="/qr" className="hover:text-neutral-900 transition-colors">
-              Share this site
-            </Link>
+            {showQrLink && (
+              <Link
+                href={QR_ROUTE}
+                className="hover:text-neutral-900 transition-colors"
+              >
+                Share this site
+              </Link>
+            )}
           </div>
         </div>
 
