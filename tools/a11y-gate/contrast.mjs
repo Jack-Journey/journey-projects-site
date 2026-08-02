@@ -16,13 +16,19 @@
  *
  * What it deliberately does NOT grade (documented blind spots, kept for
  * low-false-positive discipline per skills/accessibility §3 governing rule):
- *   - aria-hidden subtrees and .sr-only text (not visually perceived)
+ *   - .sr-only text (visually hidden — contrast does not apply)
+ *   - aria-hidden subtrees: these ARE visually rendered (aria-hidden only
+ *     removes them from the accessibility tree), so their contrast is a real
+ *     but currently ungraded surface — a named follow-up, not a claim of
+ *     non-applicability (a11y-lead F2a)
+ *   - inline style="color:..." attributes (zero live instances today)
  *   - hover/focus states and responsive (@media) overrides — base state only
  *   - text over background-image (none in this codebase's text surfaces)
  *
  * Finding granularity: one finding per (page, fg source, resolved bg, size
- * class). A count rides on the finding for reporting; count changes alone do
- * not flip the gate.
+ * class). A count rides on the finding; the ratchet uses it as a per-entry
+ * CEILING (SD-4) — a NEW instance of a baselined defect tuple is a new
+ * defect and goes RED, it does not hide under the existing entry.
  */
 
 import { parseColor, compositeOver, contrastRatio, toHex } from "./color.mjs";
@@ -53,6 +59,7 @@ export function checkContrast(page, html, oracle) {
   const doc = parseHtml(html);
   const findings = new Map();
   const errors = [];
+  let graded = 0; // text-bearing elements actually graded — a zero total corpus-wide is an oracle failure, never a pass
 
   const pageDefaultBg = parseColor(defaults["background-color"] || "#ffffff", vars) || { r: 1, g: 1, b: 1, a: 1 };
   const pageDefaultFg = parseColor(defaults["color"] || "#000000", vars) || { r: 0, g: 0, b: 0, a: 1 };
@@ -60,6 +67,8 @@ export function checkContrast(page, html, oracle) {
   // stack of inherited state as we walk
   function visit(node, inherited) {
     if (SKIP_TAGS.has(node.tagName)) return;
+    // aria-hidden content is visually rendered but excluded from the a11y
+    // tree; grading it for contrast is a named follow-up (see header note)
     if (attr(node, "aria-hidden") === "true") return;
     if (attr(node, "hidden") !== null) return;
     const cl = classList(node);
@@ -106,6 +115,7 @@ export function checkContrast(page, html, oracle) {
     // grade direct text
     const text = directText(node).replace(/\s+/g, " ").trim();
     if (text.length > 0) {
+      graded += 1;
       const fg = compositeOver(state.fg, state.bg);
       const ratio = contrastRatio(fg, state.bg);
       const large = state.fontSize >= 24 || (state.fontSize >= 18.66 && state.fontWeight >= 700);
@@ -151,5 +161,5 @@ export function checkContrast(page, html, oracle) {
     }
   });
 
-  return { findings: [...findings.values()], errors };
+  return { findings: [...findings.values()], errors, graded };
 }

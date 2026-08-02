@@ -33,6 +33,16 @@ const compat = new FlatCompat({
  * raises the enumerated rules to error.
  */
 const a11yErrorSubset = {
+  settings: {
+    "jsx-a11y": {
+      // Map Next's <Link> onto <a> so the anchor rules actually see this
+      // codebase's links — without this mapping an empty <Link> produces ZERO
+      // lint output, leaving the empty-link failure class only nominally
+      // covered on a site that navigates entirely through <Link>
+      // (a11y-lead F3, hero-6 PR#11 panel 2026-08-02).
+      components: { Link: "a" },
+    },
+  },
   rules: {
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/anchor-has-content": "error",

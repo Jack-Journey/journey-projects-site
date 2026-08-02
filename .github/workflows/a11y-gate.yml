@@ -44,6 +44,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # SD-6: the error-subset rides whatever eslint-config-next resolves for
+      # jsx-a11y — assert the tree resolves to the single exact-pinned copies
+      # (npm ls exits non-zero on missing/invalid/conflicting resolution)
+      - name: Assert a11y toolchain resolution
+        run: npm ls eslint-plugin-jsx-a11y parse5
+
       - name: jsx-a11y enumerated error subset
         run: npm run lint:a11y
 

@@ -3,8 +3,10 @@
  *
  * Checks (all machine-decidable, low-false-positive, fixable-in-PR — the
  * skills/accessibility §3 governing rule for Tier B):
- *   h1-count       : exactly one <h1> per page (SC 1.3.1 territory; heading
- *                    HIERARCHY judgement stays non-blocking per §3)
+ *   h1-missing     : h1 === 0 BLOCKS (structural absence — SC 1.3.1 territory);
+ *                    h1 > 1 is an ADVISORY only, never blocking — multiple h1s
+ *                    are heading-hierarchy judgement, verbatim on the §3
+ *                    must-NOT-block list (a11y-lead F1, hero-6 PR#11 panel)
  *   title-missing  : <title> present and non-empty (SC 2.4.2)
  *   title-duplicate: non-homepage pages must not carry the homepage's exact
  *                    <title> (the 404-inherits-site-title defect class)
@@ -27,20 +29,26 @@ function pageTitle(doc) {
 /**
  * Run template checks over one page.
  * homepageTitle: the resolved <title> of index.html (null when grading index itself).
+ * Returns { findings, advisories } — advisories are reported but never block.
  */
 export function checkTemplate(page, html, homepageTitle) {
   const doc = parseHtml(html);
   const findings = [];
+  const advisories = [];
   const add = (key, message) =>
     findings.push({ id: `template|${page}|${key}`, check: "template", page, message });
+  const advise = (key, message) =>
+    advisories.push({ id: `template|${page}|${key}`, check: "template", page, message });
 
-  // h1 count — exclude aria-hidden
+  // h1 — exclude aria-hidden. ABSENCE blocks; MULTIPLICITY is advisory only
+  // (§3 must-NOT-block: heading hierarchy is judgement, not structure)
   let h1 = 0;
   walk(doc, (n) => {
     if (attr(n, "aria-hidden") === "true") return false;
     if (n.tagName === "h1") h1++;
   });
-  if (h1 !== 1) add("h1-count", `page has ${h1} <h1> elements — required exactly 1`);
+  if (h1 === 0) add("h1-missing", "page has no <h1> — primary content region is unheaded");
+  if (h1 > 1) advise("h1-multiple", `page has ${h1} <h1> elements — review heading hierarchy (non-blocking)`);
 
   // title
   const title = pageTitle(doc);
@@ -64,7 +72,7 @@ export function checkTemplate(page, html, homepageTitle) {
   if (findAll(doc, "header").length === 0) add("banner-missing", "page has no <header> landmark");
   if (findAll(doc, "footer").length === 0) add("contentinfo-missing", "page has no <footer> landmark");
 
-  return findings;
+  return { findings, advisories };
 }
 
 export { pageTitle };
